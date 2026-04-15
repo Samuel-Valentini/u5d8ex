@@ -1,16 +1,16 @@
-package samuelvalentini.u5d8ex.playload;
+package samuelvalentini.u5d8ex.payload;
 
 
 import samuelvalentini.u5d8ex.enumeration.Categoria;
 
-public class UpdateBlogPlayload {
+public class UpdateBlogPayload {
     private Categoria categoria;
     private String titolo;
     private String cover;
     private String contenuto;
     private int tempoDiLettura;
 
-    public UpdateBlogPlayload(Categoria categoria, String titolo, String cover, String contenuto, int tempoDiLettura) {
+    public UpdateBlogPayload(Categoria categoria, String titolo, String cover, String contenuto, int tempoDiLettura) {
         this.categoria = categoria;
         this.titolo = titolo;
         this.cover = cover;

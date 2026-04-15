@@ -4,8 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import samuelvalentini.u5d8ex.entity.Autore;
 import samuelvalentini.u5d8ex.exception.NotFoundException;
-import samuelvalentini.u5d8ex.playload.AutorePlayload;
-import samuelvalentini.u5d8ex.playload.UpdateAutorePlayload;
+import samuelvalentini.u5d8ex.payload.AutorePayload;
+import samuelvalentini.u5d8ex.payload.UpdateAutorePayload;
 import samuelvalentini.u5d8ex.repository.AutoreRepository;
 
 import java.util.List;
@@ -23,8 +23,8 @@ public class AutoreService {
         return autoreRepository.findAll();
     }
 
-    public Autore saveNewAutore(AutorePlayload autorePlayload) {
-        Autore autore = new Autore(autorePlayload.getNome(), autorePlayload.getCognome(), autorePlayload.getEmail(), autorePlayload.getDataDiNascita());
+    public Autore saveNewAutore(AutorePayload autorePayload) {
+        Autore autore = new Autore(autorePayload.getNome(), autorePayload.getCognome(), autorePayload.getEmail(), autorePayload.getDataDiNascita());
         return this.autoreRepository.save(autore);
     }
 
@@ -40,13 +40,13 @@ public class AutoreService {
         log.info("Autore {} {} rimosso", nome, cognome);
     }
 
-    public Autore findByIdAndUpdate(long autoreId, UpdateAutorePlayload updateAutorePlayload) {
+    public Autore findByIdAndUpdate(long autoreId, UpdateAutorePayload updateAutorePayload) {
         Autore found = autoreRepository.findById(autoreId).orElseThrow(() -> new NotFoundException(String.valueOf(autoreId)));
-        found.setNome(updateAutorePlayload.getNome());
-        found.setCognome(updateAutorePlayload.getCognome());
-        found.setEmail(updateAutorePlayload.getEmail());
-        found.setDataDiNascita(updateAutorePlayload.getDataDiNascita());
-        found.setAvatar(updateAutorePlayload.getAvatar());
+        found.setNome(updateAutorePayload.getNome());
+        found.setCognome(updateAutorePayload.getCognome());
+        found.setEmail(updateAutorePayload.getEmail());
+        found.setDataDiNascita(updateAutorePayload.getDataDiNascita());
+        found.setAvatar(updateAutorePayload.getAvatar());
         return autoreRepository.save(found);
     }
 }

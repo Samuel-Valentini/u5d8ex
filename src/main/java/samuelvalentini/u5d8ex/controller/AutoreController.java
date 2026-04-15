@@ -3,8 +3,8 @@ package samuelvalentini.u5d8ex.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import samuelvalentini.u5d8ex.entity.Autore;
-import samuelvalentini.u5d8ex.playload.AutorePlayload;
-import samuelvalentini.u5d8ex.playload.UpdateAutorePlayload;
+import samuelvalentini.u5d8ex.payload.AutorePayload;
+import samuelvalentini.u5d8ex.payload.UpdateAutorePayload;
 import samuelvalentini.u5d8ex.service.AutoreService;
 
 import java.util.List;
@@ -31,13 +31,13 @@ public class AutoreController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Autore createNewAutore(@RequestBody AutorePlayload autorePlayload) {
-        return autoreService.saveNewAutore(autorePlayload);
+    public Autore createNewAutore(@RequestBody AutorePayload autorePayload) {
+        return autoreService.saveNewAutore(autorePayload);
     }
 
     @PutMapping("/{autoreId}")
-    public Autore updateAutore(@PathVariable long autoreId, @RequestBody UpdateAutorePlayload updateAutorePlayload) {
-        return this.autoreService.findByIdAndUpdate(autoreId, updateAutorePlayload);
+    public Autore updateAutore(@PathVariable long autoreId, @RequestBody UpdateAutorePayload updateAutorePayload) {
+        return this.autoreService.findByIdAndUpdate(autoreId, updateAutorePayload);
     }
 
     @DeleteMapping("/{autoreId}")

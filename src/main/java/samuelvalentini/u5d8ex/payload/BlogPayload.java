@@ -1,26 +1,26 @@
-package samuelvalentini.u5d8ex.playload;
+package samuelvalentini.u5d8ex.payload;
 
 
 import samuelvalentini.u5d8ex.enumeration.Categoria;
 
-public class BlogPlayload {
+public class BlogPayload {
     Categoria categoria;
     String titolo;
     String contenuto;
-    long autoreId;
+    Long autoreId;
 
-    public BlogPlayload(Categoria categoria, String titolo, String contenuto, long autoreId) {
+    public BlogPayload(Categoria categoria, String titolo, String contenuto, Long autoreId) {
         this.categoria = categoria;
         this.titolo = titolo;
         this.contenuto = contenuto;
         this.autoreId = autoreId;
     }
 
-    public long getAutoreId() {
+    public Long getAutoreId() {
         return autoreId;
     }
 
-    public void setAutoreId(long autoreId) {
+    public void setAutoreId(Long autoreId) {
         this.autoreId = autoreId;
     }
 

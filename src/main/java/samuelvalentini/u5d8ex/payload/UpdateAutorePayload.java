@@ -1,20 +1,20 @@
-package samuelvalentini.u5d8ex.playload;
+package samuelvalentini.u5d8ex.payload;
 
 import java.time.LocalDate;
 
-public class AutorePlayload {
+public class UpdateAutorePayload {
     private String nome;
     private String cognome;
     private String email;
     private LocalDate dataDiNascita;
+    private String avatar;
 
-    public AutorePlayload(String nome, String cognome, String email, LocalDate dataDiNascita) {
+    public UpdateAutorePayload(String nome, String cognome, String email, LocalDate dataDiNascita, String avatar) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
         this.dataDiNascita = dataDiNascita;
-
-
+        this.avatar = avatar;
     }
 
     public String getNome() {
@@ -47,5 +47,13 @@ public class AutorePlayload {
 
     public void setDataDiNascita(LocalDate dataDiNascita) {
         this.dataDiNascita = dataDiNascita;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

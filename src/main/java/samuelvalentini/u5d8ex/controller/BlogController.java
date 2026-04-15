@@ -4,8 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import samuelvalentini.u5d8ex.entity.Blog;
-import samuelvalentini.u5d8ex.playload.BlogPlayload;
-import samuelvalentini.u5d8ex.playload.UpdateBlogPlayload;
+import samuelvalentini.u5d8ex.exception.BadRequestException;
+import samuelvalentini.u5d8ex.payload.BlogPayload;
+import samuelvalentini.u5d8ex.payload.UpdateBlogPayload;
 import samuelvalentini.u5d8ex.service.BlogService;
 
 import java.util.List;
@@ -31,13 +32,15 @@ public class BlogController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Blog createNewBlog(@RequestBody BlogPlayload blogPlayload) {
-        return this.blogService.saveNewBlog(blogPlayload);
+    public Blog createNewBlog(@RequestBody BlogPayload blogPayload) {
+        if (blogPayload == null || blogPayload.getTitolo() == null || blogPayload.getCategoria() == null || blogPayload.getContenuto() == null || blogPayload.getAutoreId() == null)
+            throw new BadRequestException("Tutti i campi devono essere compilati");
+        return this.blogService.saveNewBlog(blogPayload);
     }
 
     @PutMapping("/{blogId}")
-    public Blog updateBlog(@PathVariable long blogId, @RequestBody UpdateBlogPlayload updateBlogPlayload) {
-        return this.blogService.findByIdAndUpdate(blogId, updateBlogPlayload);
+    public Blog updateBlog(@PathVariable long blogId, @RequestBody UpdateBlogPayload updateBlogPayload) {
+        return this.blogService.findByIdAndUpdate(blogId, updateBlogPayload);
     }
 
     @DeleteMapping("/{blogId}")

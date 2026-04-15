@@ -4,8 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import samuelvalentini.u5d8ex.entity.Blog;
 import samuelvalentini.u5d8ex.exception.NotFoundException;
-import samuelvalentini.u5d8ex.playload.BlogPlayload;
-import samuelvalentini.u5d8ex.playload.UpdateBlogPlayload;
+import samuelvalentini.u5d8ex.payload.BlogPayload;
+import samuelvalentini.u5d8ex.payload.UpdateBlogPayload;
 import samuelvalentini.u5d8ex.repository.BlogRepository;
 
 import java.util.List;
@@ -29,18 +29,18 @@ public class BlogService {
         return blogRepository.findById(blogId).orElseThrow(() -> new NotFoundException(String.valueOf(blogId)));
     }
 
-    public Blog saveNewBlog(BlogPlayload blogPlayload) {
-        Blog blog = new Blog(blogPlayload.getCategoria(), blogPlayload.getTitolo(), blogPlayload.getContenuto(), autoreService.findById(blogPlayload.getAutoreId()));
+    public Blog saveNewBlog(BlogPayload blogPayload) {
+        Blog blog = new Blog(blogPayload.getCategoria(), blogPayload.getTitolo(), blogPayload.getContenuto(), autoreService.findById(blogPayload.getAutoreId()));
         return this.blogRepository.save(blog);
     }
 
-    public Blog findByIdAndUpdate(long blogId, UpdateBlogPlayload updateBlogPlayload) {
+    public Blog findByIdAndUpdate(long blogId, UpdateBlogPayload updateBlogPayload) {
         Blog found = blogRepository.findById(blogId).orElseThrow(() -> new NotFoundException(String.valueOf(blogId)));
-        found.setCategoria(updateBlogPlayload.getCategoria());
-        found.setTitolo(updateBlogPlayload.getTitolo());
-        found.setContenuto(updateBlogPlayload.getContenuto());
-        found.setCover(updateBlogPlayload.getCover());
-        found.setTempoDiLettura(updateBlogPlayload.getTempoDiLettura());
+        found.setCategoria(updateBlogPayload.getCategoria());
+        found.setTitolo(updateBlogPayload.getTitolo());
+        found.setContenuto(updateBlogPayload.getContenuto());
+        found.setCover(updateBlogPayload.getCover());
+        found.setTempoDiLettura(updateBlogPayload.getTempoDiLettura());
         return found;
     }
 
