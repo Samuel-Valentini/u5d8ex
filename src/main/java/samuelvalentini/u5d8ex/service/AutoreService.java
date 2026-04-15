@@ -1,14 +1,16 @@
 package samuelvalentini.u5d8ex.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import samuelvalentini.u5d8ex.entity.Autore;
 import samuelvalentini.u5d8ex.exception.NotFoundException;
 import samuelvalentini.u5d8ex.payload.AutorePayload;
 import samuelvalentini.u5d8ex.payload.UpdateAutorePayload;
 import samuelvalentini.u5d8ex.repository.AutoreRepository;
-
-import java.util.List;
 
 @Service
 @Slf4j
@@ -19,8 +21,9 @@ public class AutoreService {
         this.autoreRepository = autoreRepository;
     }
 
-    public List<Autore> findAll() {
-        return autoreRepository.findAll();
+    public Page<Autore> findAll(int start) {
+        Pageable pageable = PageRequest.of(start, 3, Sort.by("cognome").ascending().and(Sort.by("nome").ascending()));
+        return autoreRepository.findAll(pageable);
     }
 
     public Autore saveNewAutore(AutorePayload autorePayload) {

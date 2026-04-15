@@ -1,13 +1,12 @@
 package samuelvalentini.u5d8ex.controller;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import samuelvalentini.u5d8ex.entity.Autore;
 import samuelvalentini.u5d8ex.payload.AutorePayload;
 import samuelvalentini.u5d8ex.payload.UpdateAutorePayload;
 import samuelvalentini.u5d8ex.service.AutoreService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/authors")
@@ -20,8 +19,9 @@ public class AutoreController {
     }
 
     @GetMapping
-    public List<Autore> findAll() {
-        return autoreService.findAll();
+    public Page<Autore> findAll(@RequestParam(defaultValue = "0") int start) {
+
+        return autoreService.findAll(start);
     }
 
     @GetMapping("/{autoreId}")
