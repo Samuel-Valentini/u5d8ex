@@ -19,7 +19,7 @@ public class Blog {
     private String titolo;
     @Column(name = "blog_cover", nullable = false)
     private String cover;
-    @Column(name = "blog_contenuto", nullable = false)
+    @Column(name = "blog_contenuto", nullable = false, columnDefinition = "TEXT")
     private String contenuto;
     @Column(name = "blog_tempo_di_lettura", nullable = false)
     private int tempoDiLettura;
@@ -30,11 +30,12 @@ public class Blog {
     protected Blog() {
     }
 
-    public Blog(Categoria categoria, String titolo, String contenuto) {
+    public Blog(Categoria categoria, String titolo, String contenuto, Autore autore) {
         Random random = new Random();
         this.categoria = categoria;
         this.titolo = titolo;
         this.contenuto = contenuto;
+        this.autore = autore;
         this.cover = "https://picsum.photos/200/300";
         //stimo il tempo di lettura in 200 parole al minuto
         this.tempoDiLettura = (int) Math.ceil((double) (contenuto.trim().split("\\s+").length) / 200);
@@ -44,6 +45,13 @@ public class Blog {
         return id;
     }
 
+    public Autore getAutore() {
+        return autore;
+    }
+
+    public void setAutore(Autore autore) {
+        this.autore = autore;
+    }
 
     public Categoria getCategoria() {
         return categoria;

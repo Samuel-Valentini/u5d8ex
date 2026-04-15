@@ -14,9 +14,11 @@ import java.util.List;
 @Slf4j
 public class BlogService {
     private final BlogRepository blogRepository;
+    private final AutoreService autoreService;
 
-    public BlogService(BlogRepository blogRepository) {
+    public BlogService(BlogRepository blogRepository, AutoreService autoreService) {
         this.blogRepository = blogRepository;
+        this.autoreService = autoreService;
     }
 
     public List<Blog> findAll() {
@@ -28,7 +30,7 @@ public class BlogService {
     }
 
     public Blog saveNewBlog(BlogPlayload blogPlayload) {
-        Blog blog = new Blog(blogPlayload.getCategoria(), blogPlayload.getTitolo(), blogPlayload.getContenuto());
+        Blog blog = new Blog(blogPlayload.getCategoria(), blogPlayload.getTitolo(), blogPlayload.getContenuto(), autoreService.findById(blogPlayload.getAutoreId()));
         return this.blogRepository.save(blog);
     }
 

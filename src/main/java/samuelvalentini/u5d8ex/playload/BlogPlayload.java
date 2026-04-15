@@ -7,11 +7,21 @@ public class BlogPlayload {
     Categoria categoria;
     String titolo;
     String contenuto;
+    long autoreId;
 
-    public BlogPlayload(Categoria categoria, String titolo, String contenuto) {
+    public BlogPlayload(Categoria categoria, String titolo, String contenuto, long autoreId) {
         this.categoria = categoria;
         this.titolo = titolo;
         this.contenuto = contenuto;
+        this.autoreId = autoreId;
+    }
+
+    public long getAutoreId() {
+        return autoreId;
+    }
+
+    public void setAutoreId(long autoreId) {
+        this.autoreId = autoreId;
     }
 
     public Categoria getCategoria() {
